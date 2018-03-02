@@ -8,10 +8,10 @@ class StorePicker extends React.Component {
          { /* making a comment*/}
          <h2>Please Enter a Store</h2>
          <input type="text" required placeholder="Store Name" />
-         <button type="submit"> Visit Store -></button>
+         <button type="submit"> Visit Store -> </button>
          </form>
          </Fragment>
-      )
+      );
    }
 }
 
