@@ -5,16 +5,14 @@ import Order from "./Order";
 
 class App extends React.Component{
    render(){
-      return(
-         <div className="catch-of-the-day">
-         <div className="menu">
-         <Header />
-         </div>
+      return <div className="catch-of-the-day">
+          <div className="menu">
+            <Header tagline="Fresh Seafood Market" age="100"/>
+          </div>
 
-         <Inventory />
-         <Order />
-         </div>
-      );
+          <Inventory />
+          <Order />
+        </div>;
    }
 }
 
