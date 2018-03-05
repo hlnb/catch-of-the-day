@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class EditFishForm extends React.Component {
-  static proptypes = {
+  static propTypes = {
     fish: PropTypes.shape({
       image: PropTypes.string,
       name: PropTypes.string,
@@ -14,12 +14,12 @@ class EditFishForm extends React.Component {
     updateFish: PropTypes.func
   };
   handleChange = event => {
-    console.log(event.target.name);
-    //update that fish
-    //1. take a copy of the current fish
+    console.log(event.currentTarget.value);
+    // update that fish
+    // 1. Take a copy of the curernt fish
     const updatedFish = {
       ...this.props.fish,
-      [event.target.name]: event.target.value
+      [event.currentTarget.name]: event.currentTarget.value
     };
     this.props.updateFish(this.props.index, updatedFish);
   };
@@ -27,23 +27,24 @@ class EditFishForm extends React.Component {
     return (
       <div className="fish-edit">
         <input
-          name="name"
           type="text"
+          name="name"
           onChange={this.handleChange}
           value={this.props.fish.name}
         />
         <input
-          name="price"
           type="text"
+          name="price"
           onChange={this.handleChange}
           value={this.props.fish.price}
         />
         <select
+          type="text"
           name="status"
           onChange={this.handleChange}
           value={this.props.fish.status}
         >
-          <option value="avaiable">Fresh</option>
+          <option value="available">Fresh!</option>
           <option value="unavailable">Sold Out!</option>
         </select>
         <textarea
@@ -52,8 +53,8 @@ class EditFishForm extends React.Component {
           value={this.props.fish.desc}
         />
         <input
-          name="image"
           type="text"
+          name="image"
           onChange={this.handleChange}
           value={this.props.fish.image}
         />
@@ -66,4 +67,3 @@ class EditFishForm extends React.Component {
 }
 
 export default EditFishForm;
-

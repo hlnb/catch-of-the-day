@@ -4,8 +4,7 @@ import firebase from "firebase";
 import AddFishForm from "./AddFishForm";
 import EditFishForm from "./EditFishForm";
 import Login from "./Login";
-import base, {firebaseApp} from "../base";
-
+import base, { firebaseApp } from "../base";
 
 class Inventory extends React.Component {
   static propTypes = {
@@ -19,6 +18,7 @@ class Inventory extends React.Component {
     uid: null,
     owner: null
   };
+
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -26,9 +26,10 @@ class Inventory extends React.Component {
       }
     });
   }
+
   authHandler = async authData => {
-    //1. look up the current store in the firebase database
-    const store = await base.fetch(this.props.storeID, { context: this });
+    // 1 .Look up the current store in the firebase database
+    const store = await base.fetch(this.props.storeId, { context: this });
     console.log(store);
     // 2. Claim it if there is no owner
     if (!store.owner) {
@@ -37,12 +38,13 @@ class Inventory extends React.Component {
         data: authData.user.uid
       });
     }
-    //3. set the state of inventory component to reflect user
+    // 3. Set the state of the inventory component to reflect the current user
     this.setState({
       uid: authData.user.uid,
       owner: store.owner || authData.user.uid
     });
   };
+
   authenticate = provider => {
     const authProvider = new firebase.auth[`${provider}AuthProvider`]();
     firebaseApp
@@ -50,6 +52,7 @@ class Inventory extends React.Component {
       .signInWithPopup(authProvider)
       .then(this.authHandler);
   };
+
   logout = async () => {
     console.log("Logging out!");
     await firebase.auth().signOut();
@@ -57,7 +60,8 @@ class Inventory extends React.Component {
   };
 
   render() {
-    const logout = <button onClick={this.logout}>Logout</button>;
+    const logout = <button onClick={this.logout}>Log Out!</button>;
+
     // 1. Check if they are logged in
     if (!this.state.uid) {
       return <Login authenticate={this.authenticate} />;
@@ -72,6 +76,7 @@ class Inventory extends React.Component {
         </div>
       );
     }
+
     // 3. They must be the owner, just render the inventory
     return (
       <div className="inventory">

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {formatPrice} from "../helpers";
-import {TransitionGroup, CSSTransition} from 'react-transition-group';
+import { formatPrice } from "../helpers";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 class Order extends React.Component {
   static propTypes = {
@@ -18,13 +18,14 @@ class Order extends React.Component {
       key,
       timeout: { enter: 500, exit: 500 }
     };
-    //makesure the fish is loaded before continuing.
+    // Make sure the fish is loaded before we continue!
     if (!fish) return null;
+
     if (!isAvailable) {
       return (
         <CSSTransition {...transitionOptions}>
           <li key={key}>
-            Sorry {fish ? fish.name : "fish"} is no longer available!
+            Sorry {fish ? fish.name : "fish"} is no longer available
           </li>
         </CSSTransition>
       );
@@ -52,7 +53,6 @@ class Order extends React.Component {
       </CSSTransition>
     );
   };
-
   render() {
     const orderIds = Object.keys(this.props.order);
     const total = orderIds.reduce((prevTotal, key) => {
@@ -70,7 +70,6 @@ class Order extends React.Component {
         <TransitionGroup component="ul" className="order">
           {orderIds.map(this.renderOrder)}
         </TransitionGroup>
-
         <div className="total">
           Total:
           <strong>{formatPrice(total)}</strong>
