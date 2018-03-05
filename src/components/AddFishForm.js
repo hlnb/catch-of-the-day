@@ -1,5 +1,5 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 class AddFishForm extends React.Component {
   nameRef = React.createRef();
   priceRef = React.createRef();
@@ -15,24 +15,40 @@ class AddFishForm extends React.Component {
       price: parseFloat(this.priceRef.value.value),
       status: this.statusRef.value.value,
       desc: this.descRef.value.value,
-      image: this.imageRef.value.value 
-      };
-      this.props.addFish(fish);
-      event.currentTarget.reset();
+      image: this.imageRef.value.value
+    };
+    this.props.addFish(fish);
+    event.currentTarget.reset();
+  };
+
+  static propTypes = {
+    addFish: PropTypes.func
   };
 
   render() {
-    return <form onSubmit={this.createFish} className="fish-edit">
+    return (
+      <form onSubmit={this.createFish} className="fish-edit">
         <input name="name" ref={this.nameRef} type="text" placeholder="Name" />
-        <input name="price" ref={this.priceRef} type="text" placeholder="Price" />
+        <input
+          name="price"
+          ref={this.priceRef}
+          type="text"
+          placeholder="Price"
+        />
         <select name="status" ref={this.statusRef}>
           <option value="avaiable">Fresh</option>
           <option value="unavailable">Sold Out!</option>
         </select>
         <textarea name="desc" ref={this.descRef} placeholder="Desc" />
-        <input name="image" ref={this.imageRef} type="text" placeholder="Image" />
+        <input
+          name="image"
+          ref={this.imageRef}
+          type="text"
+          placeholder="Image"
+        />
         <button type="submit"> + Add Fish</button>
-      </form>;
+      </form>
+    );
   }
 }
 
